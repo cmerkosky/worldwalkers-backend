@@ -1,0 +1,28 @@
+import express from 'express'
+import {sockets} from './sockets/sockets.js';
+import http from 'http';
+import routes from './routes.js'
+import cors from 'cors';
+import consola from 'consola'
+import { API_PORT, hosts } from './env.js';
+
+const app = express();
+const server = new http.Server(app);
+
+// Bind a new sockets instance to this HTTP Server
+sockets(server);
+
+app.use(cors({ origin: hosts }));
+app.use(express.json());
+
+routes(app);
+
+// Listen for HTTP requests with express on the this port
+app.listen(API_PORT, () =>{
+    consola.info(`API listening on port ${Number(API_PORT)}!`);
+});
+
+// Bind this server (and previously bound sockets instance) to this instance
+server.listen(Number(API_PORT) + 1, () => {
+    consola.info(`Sockets listening on port ${Number(API_PORT) + 1}!`);
+})

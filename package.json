@@ -1,0 +1,27 @@
+{
+  "name": "worldwalkers-backend",
+  "version": "1.0.0",
+  "description": "The backend for the 'Worldwalkers', a Web version of the classic Canadian board game 'Globetrotters'!",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmerkosky/worldwalkers-backend.git"
+  },
+  "author": "Cole Merkosky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmerkosky/worldwalkers-backend/issues"
+  },
+  "homepage": "https://github.com/cmerkosky/worldwalkers-backend#readme",
+  "dependencies": {
+    "consola": "^2.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "socket.io": "^3.1.0"
+  }
+}
