@@ -2,7 +2,8 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 export const{
-    API_PORT
+    API_PORT,
+    SOCKETS_PORT
 } = process.env
 
 export let hosts = [];

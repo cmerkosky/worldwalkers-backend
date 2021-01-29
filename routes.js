@@ -1,4 +1,4 @@
-import getRandomRoomCode from './randomRoomCode.js'
+import getRandomRoomCode from './api/randomRoomCode.js'
 
 const routes = route => {
     route.get('/', (req, res) => {

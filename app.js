@@ -4,13 +4,13 @@ import http from 'http';
 import routes from './routes.js'
 import cors from 'cors';
 import consola from 'consola'
-import { API_PORT, hosts } from './env.js';
+import { API_PORT, SOCKETS_PORT, hosts } from './env.js';
 
 const app = express();
 const server = new http.Server(app);
 
 // Bind a new sockets instance to this HTTP Server
-sockets(server);
+const io = sockets(server);
 
 app.use(cors({ origin: hosts }));
 app.use(express.json());
@@ -23,6 +23,6 @@ app.listen(API_PORT, () =>{
 });
 
 // Bind this server (and previously bound sockets instance) to this instance
-server.listen(Number(API_PORT) + 1, () => {
-    consola.info(`Sockets listening on port ${Number(API_PORT) + 1}!`);
+server.listen(SOCKETS_PORT, () => {
+    consola.info(`Sockets listening on port ${Number(SOCKETS_PORT)}!`);
 })

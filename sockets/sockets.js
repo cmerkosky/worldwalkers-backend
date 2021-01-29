@@ -1,23 +1,30 @@
 import { Server } from 'socket.io';
 import consola from 'consola';
+import Room from './room.js';
 
-const roomId = '#8BHJL'
+import { hosts } from '../env.js'
 
 export const sockets = app => {
     const io = new Server(app, {
-        path: '/classic'
+        cors: { origin: hosts }
     })
 
     consola.info('Socket.IO initialized!');
 
     const classic = io.of('/classic');
 
-    classic.on('connection', async socket => {
+    classic.on('connection', socket => {
+        const { playerName, roomCode, roomAction } = socket.handshake.query;
+        socket.send(`Hello, ${playerName}!`)
 
-        const { username, roomId, action, options} = socket.handshake.query;
+        const room = new Room({ io: classic, socket, playerName, roomCode, roomAction });
 
-        consola.info('Client connected!')
-        consola.info(socket)
+        const joinedRoom = room.init();
+        consola.info(`Client connected! Player's name: "${playerName}"`)
+
+        if(joinedRoom){
+            room.showPlayers()
+        }
     })
 
     return io;

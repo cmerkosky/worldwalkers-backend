@@ -1,16 +1,16 @@
+import consola from 'consola'
+
 export default function getRandomRoomCode(length = 3){
     var toShuffle = Object.keys(cityNames)
     shuffle(toShuffle)
-    var retList = []
-    for(var i = 0; i < length ; i++){
-        const key = toShuffle[i]
-        retList.push({
-            letter: key,
-            cityName: cityNames[key]
-        });
+    let roomCode = ""
+    for(var i = 0; i < length; i++){
+        roomCode += cityNames[toShuffle[i]]
     }
 
-    return retList
+    consola.info(`Sending room code "${roomCode}" through the API`)
+
+    return { roomCode }
 }
 
 function shuffle(o){ //v1.0
